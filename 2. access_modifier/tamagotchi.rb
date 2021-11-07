@@ -27,6 +27,7 @@ class Tamagotchi
             @satiety = @max_satiety
             @cleanliness = @max_cleanliness
             @alive = true
+            @diamonds -= 100
             return "Morreu mas passa bem"
         end
         @divine_intervention = false
