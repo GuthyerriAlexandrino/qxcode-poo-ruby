@@ -7,8 +7,8 @@ class PencilCase
 
     def insert(graphite)
         raise "O argumento tem que ser objeto de Graphite" unless graphite.instance_of? Graphite
-        return "O graphite tem calibre incompatível" unless graphite.caliber == @caliber
-        return "Já existe grafite na lapiseira" if graphite.nil?
+        return "O grafite tem calibre incompatível" unless graphite.caliber == @caliber
+        return "Já existe grafite na lapiseira" unless @graphite.nil?
         @graphite = graphite
     end
 
@@ -25,12 +25,12 @@ class PencilCase
         end
         @graphite.size -= @graphite.consumption_per_page
         if @graphite.size <= 10
-            return "Graphite acabou"
+            return "Grafite acabou"
         end
         @graphite.size
     end
 
     def to_s
-        "Calibre: #@caliber, Graphite: #@graphite"
+        "Calibre: #@caliber, Grafite: #@graphite"
     end
 end

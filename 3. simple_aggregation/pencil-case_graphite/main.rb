@@ -2,7 +2,7 @@ require_relative "graphite.rb"
 require_relative "pencil-case.rb"
 
 lapiseira = PencilCase.new(0.7)
-lapiseira.insert(Graphite.new(0.7, "4B", 14))
+puts lapiseira.insert(Graphite.new(0.7, "4B", 14))
 puts lapiseira.write
 puts lapiseira
 lapiseira.remove
