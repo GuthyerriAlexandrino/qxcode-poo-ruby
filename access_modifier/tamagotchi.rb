@@ -65,6 +65,7 @@ class Tamagotchi
         return can_ressurect? unless @alive
         rounds, @energy = @max_energy - @energy, @max_energy
         @age += rounds
+        self
     end
 
     def bath
@@ -77,6 +78,7 @@ class Tamagotchi
             @energy = 0 unless @energy > 0
             @satiety = 0 unless @satiety > 0
         end
+        self
     end
     
     def energy=(value)
