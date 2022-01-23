@@ -63,6 +63,7 @@ class Deque
     node = @first
     method = 'next'
     if index > @size / 2
+      index = @size - index - 1
       node = @last
       method = 'previous'
     end
@@ -108,10 +109,35 @@ class Deque
       node = node.next
     end
   end
+  
+  def each_after(pos)
+    node = @first
+    if pos > @size / 2
+      node = @last
+      pos.upto(@size) { node = node.previous }
+    else
+      1.upto(pos) { node = node.next }
+    end
+    until node.nil?
+      yield node.data
+      node = node.next
+    end
+  end
 
   def each_pair
     index = 0
     node = @first
+    until node.nil?
+      yield node.data, index
+      node = node.next
+      index += 1
+    end
+  end
+  
+  def each_pair_after(pos)
+    node = @first
+    1.upto(pos) { node = node.next }
+    index = pos
     until node.nil?
       yield node.data, index
       node = node.next
