@@ -5,34 +5,34 @@ twitter = Twitter.new
 loop do
   print '$'
   line = gets.chomp.split(' ')
-  cmd = line[0]
-  op = line[1..]
+  cmd = line.first
+  op = line[1..-1]
 
   case cmd
   when 'add'
-    twitter.add_user(op[0])
+    twitter.add_user(op.first)
   when 'follow'
-    twitter.user(op[0]).follow(twitter.user(op[1]))
+    twitter.user(op.first).follow(twitter.user(op[1]))
   when 'unfollow'
-    twitter.user(op[0]).unfollow(twitter.user(op[1]))
+    twitter.user(op.first).unfollow(twitter.user(op[1]))
   when 'tweet'
-    twitter.tweet(op[0], op[1..].join)
+    twitter.tweet(op.first, op[1..].join)
   when 'retweet'
-    twitter.retweet(op[0], op[1], op[2..].join)
+    twitter.retweet(op.first, op[1], op[2..].join)
   when 'like'
-    twitter.user(op[0]).like(op[2])
+    twitter.user(op.first).like(op[2])
   when 'unf_all'
-    twitter.user(op[0]).unfollow_all
+    twitter.user(op.first).unfollow_all
   when 'rej_all'
-    twitter.user(op[0]).reject_all
+    twitter.user(op.first).reject_all
   when 'delete'
-    twitter.user(op[0]).get_tweet(op[1]).mark_as_deleted
+    twitter.user(op.first).get_tweet(op[1]).mark_as_deleted
   when 'show'
     print twitter
   when 'timeline'
-    print twitter.user(op[0]).inbox
+    print twitter.user(op.first).inbox
   when 'user'
-    print twitter.user(op[0])
+    print twitter.user(op.first)
   when '\\0'
     break
   end
