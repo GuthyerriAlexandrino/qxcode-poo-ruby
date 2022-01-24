@@ -16,7 +16,7 @@ class Twitter
 
   def rm_user(username)
     user = @users[username]
-    user.inbox.my_tweets.each { |tw| tw.mark_as_deleted }
+    user.inbox.my_tweets.each(&:mark_as_deleted)
     user.reject_all
     user.unfollow_all
     @users.delete(username)

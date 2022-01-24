@@ -1,46 +1,39 @@
 require_relative 'twitter'
 
 twitter = Twitter.new
-twitter.add_user('goku')
-twitter.add_user('sara')
-twitter.add_user('tina')
-print twitter, "\n"
 
-twitter.user('goku').follow(twitter.user('sara'))
-twitter.user('goku').follow(twitter.user('tina'))
-twitter.user('sara').follow(twitter.user('tina'))
-print twitter, "\n"
+loop do
+  print '$'
+  line = gets.chomp.split(' ')
+  cmd = line[0]
+  op = line[1..]
 
-twitter.tweet('sara', 'hoje estou triste')
-twitter.tweet('tina', 'ganhei chocolate')
-twitter.tweet('sara', 'partiu ru')
-twitter.tweet('tina', 'chocolate ruim')
-twitter.tweet('goku', 'internet maldita')
-
-print twitter.user('goku').inbox, "\n"
-print twitter.user('tina').inbox, "\n"
-print twitter.user('sara').inbox, "\n"
-
-twitter.user('sara').like(1)
-twitter.user('goku').like(1)
-twitter.user('sara').like(3)
-
-print twitter.user('sara').inbox, "\n"
-print twitter.user('goku').inbox, "\n"
-
-twitter.user('goku').unfollow(twitter.user('tina'))
-print twitter
-print twitter.user('goku').inbox, "\n"
-print twitter.user('sara').inbox, "\n"
-
-twitter.retweet('sara', 3, 'olha goku, ela nao gostou do seu chocolate')
-print twitter.user('sara').inbox, "\n"
-print twitter.user('goku').inbox, "\n"
-
-print "removing------\n"
-twitter.user('tina').follow(twitter.user('sara'))
-print twitter, "\n"
-twitter.rm_user('tina')
-print twitter, "\n"
-
-print twitter.user('goku').inbox, "\n"
+  case cmd
+  when 'add'
+    twitter.add_user(op[0])
+  when 'follow'
+    twitter.user(op[0]).follow(twitter.user(op[1]))
+  when 'unfollow'
+    twitter.user(op[0]).unfollow(twitter.user(op[1]))
+  when 'tweet'
+    twitter.tweet(op[0], op[1..].join)
+  when 'retweet'
+    twitter.retweet(op[0], op[1], op[2..].join)
+  when 'like'
+    twitter.user(op[0]).like(op[2])
+  when 'unf_all'
+    twitter.user(op[0]).unfollow_all
+  when 'rej_all'
+    twitter.user(op[0]).reject_all
+  when 'delete'
+    twitter.user(op[0]).get_tweet(op[1]).mark_as_deleted
+  when 'show'
+    print twitter
+  when 'timeline'
+    print twitter.user(op[0]).inbox
+  when 'user'
+    print twitter.user(op[0])
+  when '\\0'
+    break
+  end
+end
