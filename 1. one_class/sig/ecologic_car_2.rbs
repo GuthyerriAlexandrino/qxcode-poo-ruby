@@ -1,0 +1,17 @@
+# TypeProf 0.21.2
+
+# Classes
+class Car
+  @gas_max: Integer
+  @pass_max: Integer
+  @pass: Integer
+  @km: Complex | Float | Integer | Rational
+  @gas: Complex | Float | Integer | Rational
+
+  def initialize: (Integer gas_max, Integer pass_max) -> void
+  def drive: (Integer km) -> String
+  def enter: -> String
+  def fuel: (Integer gas) -> (Complex | Float | Integer | Rational)
+  def leave: -> String
+  def to_s: -> String
+end

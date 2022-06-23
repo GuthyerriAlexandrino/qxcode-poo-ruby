@@ -1,1 +1,1 @@
-# Not-yet
+Qxcode-poo questions solved in ruby.

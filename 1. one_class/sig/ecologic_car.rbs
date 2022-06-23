@@ -1,0 +1,13 @@
+class Car
+  def initialize: (integer gas_max, untyped pass_max) -> void
+
+  def drive: (untyped km) -> (::String)
+
+  def enter: () -> untyped
+
+  def fuel: (untyped gas) -> untyped
+
+  def leave: () -> untyped
+
+  def to_s: () -> ::String
+end
